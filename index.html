@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoDo - Yapay Zeka Topluluğu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .about-text {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Target Audience */
+        .target-audience {
+            padding: 80px 20px;
+            background: #f5f7fa;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .audience-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .audience-card:hover {
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .audience-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .audience-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .benefits-list {
+            max-width: 900px;
+            margin: 50px auto 0;
+        }
+
+        .benefit-item {
+            padding: 25px;
+            margin-bottom: 20px;
+            background: #f5f7fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            background: #eef1f6;
+            transform: translateX(5px);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            opacity: 0.95;
+            font-size: 1.05rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: #f5f7fa;
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 20px;
+            background: #f5f7fa;
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .application-form {
+            max-width: 700px;
+            margin: 50px auto 0;
+            background: #f5f7fa;
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .features,
+            .audience-grid,
+            .steps,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .application-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Yapay Zeka ile İş Yapmak İsteyenler İçin Yeni Nesil Topluluk</h1>
+            <p>DoDo, yapay zeka alanında iş yapmak isteyen geliştiriciler, girişimciler ve profesyonellerin bir araya gelip networking yaptığı, iş fırsatlarının doğduğu dinamik bir topluluktur.</p>
+            <div>
+                <a href="#form" class="btn btn-primary">Topluluğa Katıl</a>
+                <a href="#about" class="btn btn-secondary">Daha Fazla Bilgi Al</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">DoDo Hakkında</h2>
+            <div class="about-text">
+                <p>
+                    <strong>DoDo nedir?</strong> DoDo, yapay zeka teknolojileri etrafında şekillenen, gerçek iş fırsatlarının doğduğu ve profesyonel bağlantıların kurulduğu yenilikçi bir topluluktur. Yapay zeka projelerinde iş birliği yapmak, ürün fikirleri geliştirmek ve sektördeki en güncel bilgilere erişmek isteyen herkes için ideal bir platformdur.
+                </p>
+                <p>
+                    Topluluğumuz, sadece teorik bilgi paylaşımının ötesine geçerek, üyelerinin birbirleriyle iş ortaklıkları kurmasını, proje ekipleri oluşturmasını ve yapay zeka alanında somut adımlar atmasını sağlar. Küçük grup buluşmaları, online etkinlikler ve kapalı topluluk kanallarıyla desteklenen DoDo, networking odaklı bir deneyim sunar.
+                </p>
+                <p>
+                    Freelance çalışan danışmanlardan kurumsal dünyadan kendi işini kurmak isteyen profesyonellere, AI/ML ile ürün geliştiren yazılımcılardan yapay zeka girişimcilerine kadar geniş bir yelpazede üyemiz bulunuyor. DoDo'da herkes deneyimlerini paylaşır, birbirinden öğrenir ve birlikte büyür.
+                </p>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Yapay Zeka Odaklı Networking</h3>
+                    <p>AI alanında çalışan ve iş yapmak isteyen profesyonellerle doğrudan bağlantı kurun</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Gerçek İş Fırsatları</h3>
+                    <p>Proje ortaklıkları, iş birlikleri ve freelance fırsatlar için ideal zemin</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Kapalı Topluluk Ortamı</h3>
+                    <p>Deneyim paylaşımı, kaynaklar ve dokümantasyon erişimi ile desteklenmiş özel bir alan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="target-audience">
+        <div class="container">
+            <h2 class="section-title">Kimler Katılmalı?</h2>
+            <p class="section-subtitle">DoDo, yapay zeka alanında aktif olmak isteyen farklı profildeki profesyoneller için tasarlandı.</p>
+
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <h3>Yapay Zeka Girişimcileri</h3>
+                    <p>AI tabanlı ürünler ve hizmetler geliştirmek isteyen, pazar fırsatlarını keşfetmek ve potansiyel yatırımcılar veya iş ortaklarıyla tanışmak isteyen girişimciler için ideal bir platform.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Freelance & Danışmanlar</h3>
+                    <p>Yapay zeka projelerinde danışmanlık ve geliştirme hizmeti veren, yeni müşteriler ve iş birlikleri arayan freelancerlar ve bağımsız danışmanlar için networking fırsatı.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Kurumsaldan Çıkmak İsteyen Profesyoneller</h3>
+                    <p>Kurumsal dünyadan kendi işini kurmak, freelance çalışmak veya bir startup'a katılmak isteyen deneyimli profesyoneller için geçiş sürecinde destek ve bağlantılar.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Ürün Geliştiriciler & Yazılımcılar</h3>
+                    <p>AI/ML teknolojileriyle ürün geliştiren, yeni projeler arayan veya mevcut projelerine ortak arayan yazılımcılar ve teknik ekip üyeleri için iş birliği olanakları.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Topluluğun Sağladığı Faydalar</h2>
+            <p class="section-subtitle">DoDo üyesi olarak yapay zeka ekosisteminde güçlü bir ağın parçası olursunuz.</p>
+
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <strong>Sektörden insanlarla doğrudan bağlantı kurma:</strong> Yapay zeka alanında aktif çalışan profesyonellerle tanışın, deneyimlerinden faydalanın ve uzun vadeli iş ilişkileri kurun.
+                </div>
+                <div class="benefit-item">
+                    <strong>İş ve proje ortaklıkları için zemin:</strong> Yeni projeler başlatın, ekip arkadaşları bulun veya mevcut projelerinize ortak arayın. DoDo'da gerçek iş fırsatları doğar.
+                </div>
+                <div class="benefit-item">
+                    <strong>Kapalı etkinlikler ve küçük grup buluşmaları:</strong> Online ve yüz yüze etkinliklerle toplulukla yakın temasta kalın, deep-dive tartışmalara katılın ve pratik bilgiler edinin.
+                </div>
+                <div class="benefit-item">
+                    <strong>Deneyim paylaşımı, kaynaklar ve dokümantasyon:</strong> Topluluğun biriktirdiği bilgi birikiminden faydalanın, case study'ler inceleyin ve kendi deneyimlerinizi paylaşarak ekosisteme katkıda bulunun.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Nasıl İşliyor?</h2>
+            <p class="section-subtitle">DoDo'ya katılmak için sadece üç basit adım.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Formu Doldur</h3>
+                    <p>Başvuru formunu doldurun, kendinizden ve DoDo'ya neden katılmak istediğinizden bahsedin.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Değerlendirme ve Geri Dönüş</h3>
+                    <p>Başvurunuz değerlendirilir ve uygunluk durumunuz hakkında size kısa sürede geri dönüş yapılır.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Topluluğa Katıl</h3>
+                    <p>Onay sonrası DoDo'nun topluluk kanallarına erişim kazanın ve networking'e hemen başlayın.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Topluluktan Sesler</h2>
+            <p class="section-subtitle">DoDo üyelerinin deneyimlerinden örnekler.</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "DoDo sayesinde yapay zeka alanında çalışan harika insanlarla tanıştım. Şu anda iki farklı projede birlikte çalışıyoruz ve bakış açım tamamen değişti. Gerçek networking budur!"
+                    </p>
+                    <p class="testimonial-author">Ayşe K.</p>
+                    <p class="testimonial-role">Ürün Yöneticisi</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Freelance olarak çalışırken yalnız hissediyordum. DoDo'ya katıldıktan sonra hem yeni müşteriler buldum hem de benzer yolda olan insanlarla deneyim paylaşma fırsatı yakaladım."
+                    </p>
+                    <p class="testimonial-author">Mehmet T.</p>
+                    <p class="testimonial-role">Yapay Zeka Geliştiricisi</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Startup'ım için co-founder ararken DoDo'ya katıldım. İlk ay içinde harika bir teknik ortakla tanıştım ve şimdi birlikte AI tabanlı bir ürün geliştiriyoruz. Çok değerli bir topluluk."
+                    </p>
+                    <p class="testimonial-author">Ece D.</p>
+                    <p class="testimonial-role">Girişimci</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Sık Sorulan Sorular</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3 class="faq-question">DoDo topluluğu ücretli mi?</h3>
+                    <p class="faq-answer">
+                        Şu an için DoDo topluluğu ücretsizdir. Amacımız, yapay zeka alanında iş yapmak isteyen profesyonelleri bir araya getirmek ve değer üreten bir ekosistem oluşturmaktır. İlerleyen dönemlerde premium özellikler sunabiliriz ancak temel networking ve topluluk erişimi her zaman ücretsiz kalacaktır.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Topluluk hangi kanallarda aktif?</h3>
+                    <p class="faq-answer">
+                        DoDo, Discord sunucusu, WhatsApp grupları ve e-posta bültenleri üzerinden aktiftir. Ayrıca düzenli olarak online ve yüz yüze etkinlikler düzenliyoruz. Katıldıktan sonra size en uygun kanalları seçebilir ve toplulukla istediğiniz şekilde etkileşimde bulunabilirsiniz.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Yapay zeka konusunda çok bilgim yok, yine de katılabilir miyim?</h3>
+                    <p class="faq-answer">
+                        Evet, kesinlikle! DoDo, farklı deneyim seviyelerindeki profesyonellere açıktır. Önemli olan yapay zeka alanında iş yapmak istemeniz ve öğrenmeye açık olmanızdır. Toplulukta deneyim paylaşımı ve birlikte öğrenme kültürü çok güçlüdür.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Etkinlikler ne sıklıkla yapılıyor?</h3>
+                    <p class="faq-answer">
+                        DoDo'da ayda en az 2-3 online etkinlik ve çeyrek dönemde bir yüz yüze buluşma organize ediyoruz. Etkinliklerin içeriği, workshop'lar, panel tartışmaları, networking saatleri ve proje showcase'lerinden oluşuyor. Tüm etkinlikler önceden duyurulur ve katılım isteğe bağlıdır.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Başvuru yaptıktan sonra ne kadar sürede dönüş alırım?</h3>
+                    <p class="faq-answer">
+                        Başvurunuz genellikle 3-5 iş günü içinde değerlendirilir ve size e-posta yoluyla geri dönüş yapılır. Yoğun dönemlerde bu süre biraz uzayabilir ancak mutlaka bilgilendirilirsiniz.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form -->
+    <section id="form" class="form-section">
+        <div class="container">
+            <h2 class="section-title">Topluluğa Katıl</h2>
+            <p class="section-subtitle">Formu doldurarak DoDo'ya başvurun ve yapay zeka ekosisteminde yerinizi alın.</p>
+
+            <form class="application-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Ad Soyad *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-posta *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Kısaca kendinden bahset ve DoDo'ya neden katılmak istiyorsun? *</label>
+                    <textarea id="message" name="message" required placeholder="Örneğin: Yapay zeka alanında çalışıyorum, yeni projeler ve iş ortaklıkları arıyorum..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Başvurumu Gönder</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Yapay Zeka ile İş Yapmak İstiyorsan DoDo'da Yerini Al</h2>
+            <p>DoDo, yapay zeka odağında iş yapmak isteyenlerin birbirini bulduğu bir topluluk. İlk adımı şimdi at ve networking'e başla.</p>
+            <a href="#form" class="btn btn-primary">Hemen Katıl</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">DoDo</div>
+                <p>&copy; 2025 DoDo. Tüm hakları saklıdır.</p>
+                <p>İletişim: <a href="mailto:hello@dodo.community">hello@dodo.community</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
